@@ -7,8 +7,11 @@ let width;
 let height;
 
 // instructions
-let instructions = document.getElementById('instructions');
-let instructionsButton = document.getElementById('show-instructions-button');
+const instructions = document.getElementById('instructions');
+const instructionsButton = document.getElementById('show-instructions-button');
+
+// reset button
+const resetButton = document.getElementById('reset-button');
 
 // Get DOM elements for user note inputs
 const particleCountInput = document.getElementById('particle-count');
@@ -287,6 +290,15 @@ instructionsButton.addEventListener('click', function() {
         instructions.style.display = 'none';
         instructionsButton.innerText = 'Show Instructions';
     }
+});
+
+// Event listener for resetting the simulation
+resetButton.addEventListener('click', function() {
+    // Remove all particles from the world
+    World.remove(engine.world, particles);
+
+    // Reset the particles array
+    particles = [];
 });
 
 // Event listener for changing the canvas size based on user input for volume
