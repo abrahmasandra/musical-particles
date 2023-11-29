@@ -16,8 +16,38 @@
 </head>
 <body>
     <h1>Music from a Particle Simulation</h1>
+    
+    <div>
+        <h4>Box Condition Controls: </h4>
+
+        <label for="temperature">Temperature: </label>
+        <input type="range" id="temperature" min="15" max="95" value="45" step="1">
+
+        <label for="volume">Volume: </label>
+        <input type="range" id="volume" min="0" max="100" value="50" step="1">
+    </div>
+
+    <div id="info">
+        <h4>Particle Controls: </h4>
+
+        <label for="particle-count">Particle Count:</label>
+        <input type="number" id="particle-count" value="2" min="1" step="1">
+
+        <label for="particle-size">Particle Size: </label>
+        <input type="range" id="particle-size" min="5" max="25" value="12" step="2">
+        
+        <label for="note-input">Particle Note:</label>
+        <input type="text" id="note-input" placeholder="Enter note (e.g., C4)">
+        
+        <button id="add-particle-button">Add Particle</button>
+    </div>
 
     <div>
+        <canvas id="my-canvas"></canvas>
+    </div>
+
+    <button id="show-instructions-button">Show Instructions</button>
+    <div id="instructions" style="display: none;">
         <h2>Instructions: </h2>
         <p>
             In this online instrument, you can create sounds through particle collisions. Each particle has a 
@@ -48,35 +78,6 @@
             The sounds work the best with a low number of particles (under 10). Otherwise, if too many collisions
             happen at once, the sounds will not play correctly.
         </p>
-    </div>
-    
-    <div>
-        <h4>Box Condition Controls: </h4>
-
-        <label for="temperature">Temperature: </label>
-        <input type="range" id="temperature" min="15" max="95" value="45" step="1">
-
-        <label for="volume">Volume: </label>
-        <input type="range" id="volume" min="0" max="100" value="50" step="1">
-    </div>
-
-    <div id="info">
-        <h4>Particle Controls: </h4>
-
-        <label for="particle-count">Particle Count:</label>
-        <input type="number" id="particle-count" value="2" min="1" step="1">
-
-        <label for="particle-size">Particle Size: </label>
-        <input type="range" id="particle-size" min="5" max="25" value="12" step="2">
-        
-        <label for="note-input">Particle Note:</label>
-        <input type="text" id="note-input" placeholder="Enter note (e.g., C4)">
-        
-        <button id="add-particle-button">Add Particle</button>
-    </div>
-
-    <div>
-        <canvas id="my-canvas"></canvas>
     </div>
 
     <script src="app.js"></script>

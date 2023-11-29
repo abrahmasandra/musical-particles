@@ -6,6 +6,10 @@ const polySynth = new Tone.PolySynth().toDestination();
 let width;
 let height;
 
+// instructions
+let instructions = document.getElementById('instructions');
+let instructionsButton = document.getElementById('show-instructions-button');
+
 // Get DOM elements for user note inputs
 const particleCountInput = document.getElementById('particle-count');
 const noteInput = document.getElementById('note-input');
@@ -17,6 +21,40 @@ const canvas = document.getElementById('my-canvas');
 // Get DOM elements for user input conditions
 const volumeInput = document.getElementById('volume');
 const temperatureInput = document.getElementById('temperature');
+
+// create particle color map
+const hues = {
+    "C": 0,
+    "C#": 30,
+    "Db": 30,
+    "D": 60,
+    "D#": 90,
+    "Eb": 90,
+    "E": 120,
+    "F": 150,
+    "F#": 180,
+    "Gb": 180,
+    "G": 210,
+    "G#": 240,
+    "Ab": 240,
+    "A": 270,
+    "A#": 300,
+    "Bb": 300,
+    "B": 330,
+};
+
+// create saturation map that depends on the octave
+const saturations = {
+    0: 100,
+    1: 80,
+    2: 60,
+    3: 40,
+    4: 20,
+    5: 0,
+    6: 0,
+    7: 0,
+    8: 0,
+};
 
 // Store the user input conditions
 let volume = parseFloat(volumeInput.value);
@@ -32,7 +70,9 @@ let particles = [];
 let walls = [];
 
 // Create an engine with no gravity
-const engine = Engine.create({ gravity: { x: 0, y: 0 } });
+const engine = Engine.create({ 
+    gravity: { x: 0, y: 0 } 
+});
 
 // Create a renderer
 let render = Render.create({
@@ -199,6 +239,11 @@ addParticleButton.addEventListener('click', function() {
     const count = parseInt(particleCountInput.value);
     const note = noteInput.value.trim(); // Get the note input and remove leading/trailing spaces
     const particleSize = parseInt(particleSizeInput.value);
+
+    // get the hue and saturation for the particle
+    const hue = hues[note.slice(0, -1)];
+    const octave = parseInt(note.slice(-1));
+    const saturation = saturations[octave];
     
     if (count && note) {
         for (let i = 0; i < count; i++) {
@@ -213,6 +258,11 @@ addParticleButton.addEventListener('click', function() {
                     frictionStatic: 0, // No static friction
                     inertia: Infinity, // Infinite mass
                     label: particleLabel, // Label the particle
+                    render: {
+                        fillStyle: `hsl(${hue}, ${saturation}%, 50%)`,
+                        strokeStyle: `hsl(${hue}, ${saturation}%, 50%)`,
+                        lineWidth: 2,
+                    },
                 }
             );
 
@@ -225,6 +275,17 @@ addParticleButton.addEventListener('click', function() {
             particles.push(particle);
             World.add(engine.world, particle);
         }
+    }
+});
+
+// Event listener for showing/hiding instructions
+instructionsButton.addEventListener('click', function() {
+    if (instructions.style.display === 'none') {
+        instructions.style.display = 'block';
+        instructionsButton.innerText = 'Hide Instructions';
+    } else {
+        instructions.style.display = 'none';
+        instructionsButton.innerText = 'Show Instructions';
     }
 });
 
