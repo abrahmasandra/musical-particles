@@ -4,6 +4,115 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gas Simulation Music</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/matter-js@0.18.0/build/matter.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tone@14.8.30/build/Tone.js"></script>
+    <style>
+        body { 
+            margin: 0; 
+            background-color: #dcdcdc;
+        }
+        canvas { 
+            display: block; 
+            margin: auto;
+        }
+    </style>
+</head>
+<body class="container mt-4">
+    <h1 class="text-center">Music from a Particle Simulation</h1>
+    
+    <div class="mt-4">
+        <h4>Box Condition Controls: </h4>
+
+        <div class="form-row">
+            <div class="col-md-6 form-group">
+                <label for="temperature">Temperature:</label>
+                <input type="range" class="form-control" id="temperature" min="15" max="95" value="45" step="1">
+            </div>
+    
+            <div class="col-md-6 form-group">
+                <label for="volume">Volume:</label>
+                <input type="range" class="form-control" id="volume" min="0" max="100" value="50" step="1">
+            </div>
+        </div>
+    </div>
+
+    <div id="info" class="mt-4">
+        <h4>Particle Controls: </h4>
+
+        <div class="form-row">
+            <div class="col-md-4 form-group">
+                <label for="particle-count">Particle Count:</label>
+                <input type="number" class="form-control" id="particle-count" value="2" min="1" step="1">
+            </div>
+            
+            <div class="col-md-4 form-group">
+                <label for="note-input">Particle Note:</label>
+                <input type="text" class="form-control" id="note-input" placeholder="Enter note (e.g., C4)">
+            </div>
+
+            <div class="col-md-4 form-group">
+                <label for="particle-size">Particle Size:</label>
+                <input type="range" class="form-control" id="particle-size" min="5" max="25" value="12" step="2">
+            </div>
+        </div>
+        
+        <button id="add-particle-button" class="btn btn-primary">Add Particle</button>
+    </div>
+
+    <div class="mt-4">
+        <button id="reset-button" class="btn btn-danger">Reset Simulation</button>
+    </div>
+
+    <div class="mt-4">
+        <canvas id="my-canvas"></canvas>
+    </div>
+
+    <button id="show-instructions-button" class="btn btn-info mt-4">Show Instructions</button>
+    <div id="instructions" style="display: none;">
+        <h2>Instructions: </h2>
+        <p>
+            In this online instrument, you can create sounds through particle collisions. Each particle has a 
+            corresponding note, and when two particles collide, they play their notes. When a particle collides
+            with a wall, it plays its note. 
+            <br>
+            <br>
+            You can change the note of a particle by typing a note into the note input and clicking the add
+            particle button. The particle size slider allows you to change the size of the particles. The
+            note input accepts any note in scientific pitch notation. You can also change the particle count 
+            to input multiple particles with the same note/size at once. 
+            <br>
+            <br>
+            In addition to the particle controls, you can also change the temperature and volume of the box.
+            The temperature of the box determines the average velocity of the particles. The higher the 
+            temperature, the faster the particles move. The volume (or size) of the box is determined by the
+            volume slider.
+            <br>
+            <br>
+            The box is a closed system, so the particles will not leave the box. The particles will bounce
+            off the walls of the box. The one exception is that in the case that the volume of the box is 
+            shrunk, the particles outside of the new box will be removed. The box is also a closed system in 
+            terms of energy, so the total energy of the system will remain approximately constant.
+        </p>
+
+        <h4>Note: </h4>
+        <p>
+            The sounds work the best with a low number of particles (under 10). Otherwise, if too many collisions
+            happen at once, the sounds will not play correctly.
+        </p>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gas Simulation Music</title>
     <script src="https://cdn.jsdelivr.net/npm/matter-js@0.18.0/build/matter.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/tone@14.8.30/build/Tone.js"></script>
     <style>
@@ -47,7 +156,9 @@
     </div>
 
     <div>
-        <canvas id="my-canvas"></canvas>
+        <canvas id="my-canvas" style="align-items: center; justify-content: center;">
+
+        </canvas>
     </div>
 
     <button id="show-instructions-button">Show Instructions</button>
@@ -86,4 +197,4 @@
 
     <script src="app.js"></script>
 </body>
-</html>
+</html> -->

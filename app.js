@@ -85,6 +85,7 @@ let render = Render.create({
         width: width, // Set your desired canvas width
         height: height, // Set your desired canvas height
         wireframes: false, // Show solid shapes
+        background: '#dcdcdc', // Set the canvas background color
     }
 });
 
@@ -106,9 +107,9 @@ function drawWalls() {
         frictionStatic: 0, // No static friction
         inertia: Infinity, // Infinite mass
         render: {
-            fillStyle: 'gold',
-            strokeStyle: 'gold',
-            lineWidth: 2,
+            fillStyle: '#007bff',
+            strokeStyle: '#007bff',
+            lineWidth: 3,
         },
     };
 
